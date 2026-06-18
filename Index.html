@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Love Countdown ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            background: #fff;
+        }
+
+        #timer {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .heart {
+            width: 200px;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>❤️ Countdown ❤️</h1>
+
+    <div id="timer"></div>
+
+    <img
+        class="heart"
+        src="https://media.tenor.com/8mG9K4jN5iAAAAAC/love-heart.gif"
+        alt="Heart Animation"
+    >
+
+    <script>
+        const targetDate = new Date("2026-06-26T12:00:00").getTime();
+
+        const interval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("timer").innerHTML =
+                    "❤️ Finally Together ❤️";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24))
+                                    / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60))
+                                      / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60))
+                                      / 1000);
+
+            document.getElementById("timer").innerHTML =
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }, 1000);
+    </script>
+
+</body>
+</html>
