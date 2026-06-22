@@ -1,65 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Love Countdown ❤️</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 80px;
-            background: #fff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        #timer {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
+<title>Our Love Countdown ❤️</title>
 
-        .heart {
-            width: 200px;
-            max-width: 80%;
-        }
-    </style>
+<style>
+body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+    font-family:Arial,sans-serif;
+    text-align:center;
+}
+
+.container{
+    padding:20px;
+}
+
+h1{
+    color:#fff;
+    font-size:2rem;
+}
+
+#timer{
+    font-size:2.5rem;
+    font-weight:bold;
+    color:#fff;
+    margin:20px 0;
+}
+
+.message{
+    color:#fff;
+    font-size:1.1rem;
+    margin-bottom:20px;
+}
+
+.heart{
+    width:220px;
+    max-width:80%;
+    border-radius:10px;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-    <h1>❤️ Counting Every Second Until I Meet You  ❤️</h1>
+<div class="container">
 
-    <div id="timer"></div>
+<h1>❤️ Counting every second until I meet you ❤️</h1>
 
-    <img
-        class="heart"
-        src="https://media.tenor.com/8mG9K4jN5iAAAAAC/love-heart.gif"
-        alt="Heart Animation"
-    >
+<div id="timer">Loading...</div>
 
-    <script>
-        const targetDate = new Date("2026-06-26T12:00:00").getTime();
+<div class="message">
+Every second brings me closer to you ❤️
+</div>
 
-        const interval = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+<img
+class="heart"
+src="https://media.tenor.com/8mG9K4jN5iAAAAAC/love-heart.gif"
+alt="Heart Animation">
 
-            if (distance < 0) {
-                clearInterval(interval);
-                document.getElementById("timer").innerHTML =
-                    "❤️ Finally Together ❤️";
-                return;
-            }
+<br>
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24))
-                                    / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60))
-                                      / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60))
-                                      / 1000);
+<button onclick="toggleMusic()">
+🎵 Play / Pause Music
+</button>
 
-            document.getElementById("timer").innerHTML =
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        }, 1000);
-    </script>
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+
+function toggleMusic() {
+    const music = document.getElementById("bgMusic");
+
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+/* CHANGE THIS DATE */
+const targetDate = new Date("2026-06-26T12:00:00").getTime();
+
+const interval = setInterval(() => {
+
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if(distance < 0){
+        clearInterval(interval);
+
+        document.getElementById("timer").innerHTML =
+        "❤️ Finally Together ❤️";
+
+        return;
+    }
+
+    const days =
+    Math.floor(distance / (1000*60*60*24));
+
+    const hours =
+    Math.floor((distance % (1000*60*60*24))
+    /(1000*60*60));
+
+    const minutes =
+    Math.floor((distance % (1000*60*60))
+    /(1000*60));
+
+    const seconds =
+    Math.floor((distance % (1000*60))
+    /1000);
+
+    document.getElementById("timer").innerHTML =
+    days + "d "
+    + hours + "h "
+    + minutes + "m "
+    + seconds + "s";
+
+},1000);
+
+</script>
 
 </body>
 </html>
